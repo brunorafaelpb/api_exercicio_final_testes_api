@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de Estoque e Usuários",
+    "version": "1.0.0",
+    "description": "API para cadastro de usuários, login, e gerenciamento de produtos com autenticação JWT."
+  },
+  "paths": {
+    "/register": {
+      "post": {
+        "summary": "Registrar novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Usuário criado" },
+          "400": { "description": "Usuário e senha obrigatórios" },
+          "409": { "description": "Usuário já existe" }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login do usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido, retorna JWT",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "400": { "description": "Usuário e senha obrigatórios" },
+          "401": { "description": "Credenciais inválidas" }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Consultar usuários",
+        "responses": {
+          "200": { "description": "Lista de usuários" }
+        }
+      }
+    },
+    "/products": {
+      "post": {
+        "summary": "Adicionar produto ao estoque",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "value": { "type": "number" },
+                  "quantity": { "type": "integer" }
+                },
+                "required": ["name", "value", "quantity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Produto cadastrado ou quantidade incrementada" },
+          "400": { "description": "Nome, valor e quantidade obrigatórios" },
+          "401": { "description": "Token não informado ou inválido" }
+        }
+      },
+      "get": {
+        "summary": "Consultar produtos do estoque",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Lista de produtos" },
+          "401": { "description": "Token não informado ou inválido" }
+        }
+      },
+      "delete": {
+        "summary": "Remover produto do estoque",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "quantity": { "type": "integer" }
+                },
+                "required": ["id", "quantity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Produto removido ou quantidade decrementada" },
+          "400": { "description": "Quantidade insuficiente ou produto não encontrado" },
+          "401": { "description": "Token não informado ou inválido" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
