@@ -31,5 +31,9 @@ jobs:
     - name: Waiting for API to start
       run: sleep 5
 
+    - name: Creating .env
+      run: |
+        echo "BASE_URL_REST=${{ secrets.BASE_URL_REST }}" >> .env
+
     - name: Run API tests from HTTP
       run: npm run test-external-rest
