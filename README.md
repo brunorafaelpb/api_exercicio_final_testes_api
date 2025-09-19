@@ -26,6 +26,14 @@ node server.js
 
 A API REST estará disponível em `http://localhost:3000`.
 
+## Executando a API GraphQL
+
+```bash
+node graphql/server.js
+```
+
+A API GraphQL estará disponível em `http://localhost:4000/graphql`.
+
 ## Documentação Swagger
 
 Acesse a documentação interativa em:
@@ -57,6 +65,43 @@ http://localhost:3000/api-docs
 ### Remover Produto
 - `DELETE /products` (requer JWT)
   - Body: `{ "id": "string", "quantity": number }`
+
+## Testando a API GraphQL
+
+Você pode acessar o playground Apollo em:
+```
+http://localhost:4000/graphql
+```
+
+### Exemplo de Query
+```graphql
+query {
+  products {
+    id
+    nome
+    preco
+    quantidade
+  }
+}
+```
+
+### Exemplo de Mutation (login)
+```graphql
+mutation {
+  login(username: "usuario", password: "senha") {
+    token
+    username
+  }
+}
+```
+
+### Autenticação nas Mutations
+Para Mutations protegidas (ex: transferProduct), inclua o token JWT no header:
+```
+{
+  "Authorization": "Bearer <seu_token_jwt>"
+}
+```
 
 ## Regras de Negócio
 - Não é possível registrar usuários duplicados.
