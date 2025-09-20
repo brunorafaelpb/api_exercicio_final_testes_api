@@ -1,0 +1,59 @@
+[
+    {
+        "nome":"Cadastro de produto sem nome",
+        "createProduct":{
+            "query": "mutation CreateProduct($name: String, $value: Float, $quantity: Int) { createProduct(name: $name, value: $value, quantity: $quantity) { message product { id name value quantity}}}",
+            "variables": {
+                "value": 100,
+                "quantity": 1
+            }
+        },
+        "mensagemEsperada": "Nome, valor e quantidade obrigatórios"
+    },
+    {
+        "nome":"Cadastro de produto sem valor",
+        "createProduct":{
+            "query": "mutation CreateProduct($name: String, $value: Float, $quantity: Int) { createProduct(name: $name, value: $value, quantity: $quantity) { message product { id name value quantity}}}",
+            "variables": {
+                "name": "Headset",
+                "quantity": 1
+            }
+        },
+        "mensagemEsperada": "Nome, valor e quantidade obrigatórios"
+    },
+    {
+        "nome":"Cadastro de produto sem quantidade",
+        "createProduct":{
+            "query": "mutation CreateProduct($name: String, $value: Float, $quantity: Int) { createProduct(name: $name, value: $value, quantity: $quantity) { message product { id name value quantity}}}",
+            "variables": {
+                "name": "Headset",
+                "value": 1
+            }
+        },
+        "mensagemEsperada": "Nome, valor e quantidade obrigatórios"
+    },
+    {
+        "nome":"Cadastro de produto com quantidade negativa",
+        "createProduct":{
+            "query": "mutation CreateProduct($name: String, $value: Float, $quantity: Int) { createProduct(name: $name, value: $value, quantity: $quantity) { message product { id name value quantity}}}",
+            "variables": {
+                "name": "Headset",
+                "value": 1,
+                "quantity": -1
+            }
+        },
+        "mensagemEsperada": "Quantidade não pode ser negativa"
+    },
+    {
+        "nome":"Cadastro de produto com valor negativo",
+        "createProduct":{
+            "query": "mutation CreateProduct($name: String, $value: Float, $quantity: Int) { createProduct(name: $name, value: $value, quantity: $quantity) { message product { id name value quantity}}}",
+            "variables": {
+                "name": "Headset",
+                "value": -1,
+                "quantity": 1
+            }
+        },
+        "mensagemEsperada": "Valor não pode ser negativo"
+    }
+]

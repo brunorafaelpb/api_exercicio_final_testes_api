@@ -1,0 +1,7 @@
+{
+    "query": "mutation RemoveProduct($productId: ID!, $quantity: Int!) { removeProduct(id: $productId, quantity: $quantity) { message product {id name value quantity}}}",
+    "variables": {
+        "productId": "1",
+        "quantity": 1
+    }
+}

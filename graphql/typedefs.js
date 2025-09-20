@@ -24,7 +24,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createProduct(name: String!, value: Float!, quantity: Int!): ProductResult!
+    createProduct(name: String, value: Float, quantity: Int): ProductResult
     removeProduct(id: ID!, quantity: Int!): ProductResult!
     registerUser(username: String!, password: String!): User!
     login(username: String!, password: String!): User!

@@ -7,6 +7,7 @@
     "test": "mocha 'test/**/*.test.js' --timeout 10000 --reporter mochawesome",
     "test-controller-rest": "mocha 'test/rest/controller/*.test.js' --timeout 10000 --reporter mochawesome",
     "test-external-rest": "mocha 'test/rest/external/*.test.js' --timeout 10000 --reporter mochawesome",
+    "test-external-graphql": "mocha 'test/graphql/external/*.test.js' --timeout 10000 --reporter mochawesome",
     "start": "node server.js"
   },
   "keywords": [],
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "chai": "4.5.0",
+    "chai-exclude": "^2.1.1",
     "mocha": "^11.7.1",
     "mochawesome": "^7.1.3",
     "sinon": "^21.0.0",
