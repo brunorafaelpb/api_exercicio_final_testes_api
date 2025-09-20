@@ -21,7 +21,7 @@ Esse arquivo é necessário para que os testes funcionem corretamente.
 ## Executando a API REST
 
 ```bash
-node server.js
+npm start
 ```
 
 A API REST estará disponível em `http://localhost:3000`.
@@ -29,7 +29,7 @@ A API REST estará disponível em `http://localhost:3000`.
 ## Executando a API GraphQL
 
 ```bash
-node graphql/server.js
+npm run start-graphql
 ```
 
 A API GraphQL estará disponível em `http://localhost:4000/graphql`.
@@ -41,7 +41,7 @@ Acesse a documentação interativa em:
 http://localhost:3000/api-docs
 ```
 
-## Endpoints
+## Endpoints REST
 
 ### Registro de Usuário
 - `POST /register`
@@ -102,15 +102,5 @@ Para Mutations protegidas (ex: transferProduct), inclua o token JWT no header:
   "Authorization": "Bearer <seu_token_jwt>"
 }
 ```
-
-## Regras de Negócio
-- Não é possível registrar usuários duplicados.
-- Login exige usuário e senha.
-- Adicionar produto com nome repetido incrementa a quantidade.
-- Não é possível remover produto deixando quantidade menor que zero.
-- Todas as operações de produto exigem autenticação JWT.
-
-## Testes
-Você pode usar ferramentas como Supertest para testar tanto a API REST (`app.js`) quanto a API GraphQL (`graphql/app.js`) sem iniciar o servidor.
 
 ---
