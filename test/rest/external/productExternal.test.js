@@ -2,7 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 require('dotenv').config();
 
-describe('Product External Tests', () => {
+describe('Product External Tests (REST)', () => {
     before(async () => {
             const credentials = require('../fixture/requests/login/postLogin.json');
 

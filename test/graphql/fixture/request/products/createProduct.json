@@ -1,0 +1,8 @@
+{
+    "query": "mutation CreateProduct($name: String!, $value: Float!, $quantity: Int!) { createProduct(name: $name, value: $value, quantity: $quantity) { message product { id name value quantity}}}",
+    "variables": {
+        "name": "Mouse",
+        "value": 50,
+        "quantity": 2
+    }
+}

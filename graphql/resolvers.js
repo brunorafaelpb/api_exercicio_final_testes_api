@@ -12,7 +12,7 @@ module.exports = {
   Mutation: {
     createProduct: async (_, { name, value, quantity }, context) => {
       if (!context.user) throw new Error('Autenticação obrigatória');
-      if (!name || value == null || quantity == null) {
+      if (!name || value === undefined || value === null || quantity === undefined || quantity === null) {
         throw new Error('Nome, valor e quantidade obrigatórios');
       }
       if (value < 0) {
@@ -30,7 +30,10 @@ module.exports = {
       }
       return productService.removeProduct(id, quantity);
     },
-    listProducts: () => productService.getProducts(),
+    listProducts: (_, __, context) => {
+      if (!context.user) throw new Error('Autenticação obrigatória');
+      return productService.getProducts();
+    },
     registerUser: async (_, { username, password }) => {
       if (!username || !password) throw new Error('Usuário e senha obrigatórios');
       const user = userService.registerUser(username, password);
